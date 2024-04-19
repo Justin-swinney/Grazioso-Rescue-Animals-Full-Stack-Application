@@ -1,0 +1,35 @@
+<nav class="navbar fixed navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a (click)="navigateToDashboard()" class="navbar-brand d-flex align-items-center">
+      <!-- Call navigation to dashboard method when clicked. -->
+      <img alt="" class="d-inline-block align-top" height="49"
+           ngSrc="../../../../assets/images/logo/grazioso-salvare-logo.svg" width="67" loading="eager"> <!-- Company logo icon -->
+      <span class="navbar-brand mb-0 h1">Grazioso Animal Academy</span> <!-- Application name next to company logo-->
+    </a>
+
+    <button aria-controls="top-barToggle" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-bs-target="#top-barToggle" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Page Navigation -->
+    <div class="collapse navbar-collapse" id="top-barToggle">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a (click)="navigateToDashboard()" class="nav-link active">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="navigateToIntake()" class="nav-link active">New Intake</a>
+        </li>
+      </ul>
+      <!-- Sign out button-->
+      <div class="ms-auto">
+        <button (click)="logoutUser()" class="btn btn-primary btn-lg d-flex align-items-center"
+                style="--bs-btn-padding-y: .50rem; --bs-btn-padding-x: .60rem; --bs-btn-font-size: 1.0rem;"
+                type="button">
+          <span class="me-2"> Sign out </span>
+          <i class="bi-box-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

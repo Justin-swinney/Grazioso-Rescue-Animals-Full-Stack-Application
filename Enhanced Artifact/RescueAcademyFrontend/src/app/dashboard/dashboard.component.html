@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row py-3 align-items-end">
+    <div class="col">
+      <h1>{{ tableTitle }}</h1>
+      <app-filter (resetSearch)="onResetAll()" (updateFilters)="updateFilters($event)"></app-filter>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <app-search (searchTermChange)="searchCurrentList($event)"></app-search>
+    </div>
+    <div class="card shadow p-3" style="margin-top: 20px;">
+      <app-rescue-animal-table [animalsPerPage]="animalsPerPage" [currentPage]="currentPage"
+                               [filteredRescueAnimals]="filteredRescueAnimals"></app-rescue-animal-table>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <label for="itemsPerPageSelect">Items per page:</label>
+          <select [(ngModel)]="animalsPerPage" class="form-select form-select-sm" id="itemsPerPageSelect"
+                  style="width: auto;">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+        <app-table-navigation
+          (pageChanged)="onPageChange($event)"
+          [currentPage]="currentPage"
+          [totalPages]="totalPages">
+        </app-table-navigation>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<button (click)="toggleSort()" class="btn no-outline">
+  <i *ngIf="sortState === 'asc'" class="bi bi-caret-up-fill"></i>
+  <i *ngIf="sortState === 'desc'" class="bi bi-caret-down-fill"></i>
+  <i *ngIf="sortState === 'none'" class="bi bi-filter"></i>
+</button>

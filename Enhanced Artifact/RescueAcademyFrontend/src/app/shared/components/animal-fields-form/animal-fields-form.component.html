@@ -1,0 +1,308 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="animalFieldsForm">
+  <div class="container py-3">
+    <div class="card shadow">
+      <div class="card-header text-center ">
+        <div class="row justify-content-center py-3">
+          <div *ngIf="!animal">
+            <div class="col-auto">
+              <h5>Select Animal Type
+                <span *ngIf="submittedForm && animalFieldsForm.get('animalType')?.invalid"
+                      class="text-danger asterisk"></span>
+              </h5>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-auto">
+                <div class="form-check form-check-inline">
+                  <input (change)="onAnimalTypeChange('dog')" [checked]="selectedAnimalType === 'dog'"
+                         class="form-check-input" formControlName="animalType"
+                         id="dogRadio" required type="radio" value="dog">
+                  <label class="form-check-label" for="dogRadio">Dog</label>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="form-check form-check-inline">
+                  <input (change)="onAnimalTypeChange('monkey')" [checked]="selectedAnimalType === 'monkey'"
+                         class="form-check-input" formControlName="animalType"
+                         id="monkeyRadio" required type="radio" value="monkey">
+                  <label class="form-check-label" for="monkeyRadio">Monkey</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label class="form-label" for="formFile">Animal Profile Picture
+                <div *ngIf="animalFieldsForm.get('formFile')?.errors?.['backend']" class="text-danger asterisk ms-2">
+                  {{ animalFieldsForm.get('formFile')?.errors?.['backend'] }}
+                </div>
+              </label>
+              <input (change)="onImageSelected($event)" accept=".jpg, .png, .jpeg" class="form-control" id="formFile"
+                     type="file">
+              <div class="form-text" id="fileHelp">Only JPG, PNG, and JPEG files are allowed.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="rescueType">Rescue Type
+            <div *ngIf="animalFieldsForm.get('rescueType')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('rescueType')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <select class="form-select" formControlName="rescueType" id="rescueType" required>
+            <option disabled selected value="">Select...</option>
+            <option value="Water Rescue">Water Rescue</option>
+            <option value="Fire Rescue">Fire Rescue</option>
+            <option value="Wilderness Rescue">Wilderness Rescue</option>
+            <option value="Urban Search and Rescue">Urban Search and Rescue</option>
+            <option value="Disaster Tracking">Disaster Tracking</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="trainingStatus">Training Status
+            <div *ngIf="animalFieldsForm.get('trainingStatus')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('trainingStatus')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <select class="form-select" formControlName="trainingStatus" id="trainingStatus" required>
+            <option disabled selected value="">Select...</option>
+            <option>Not Started</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+            <option>Completed</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="reserved">Reservation Status
+            <div *ngIf="animalFieldsForm.get('reserved')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('reserved')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <select class="form-select" formControlName="reserved" id="reserved" required>
+            <option disabled selected value="">Select...</option>
+            <option value=true>Reserved</option>
+            <option value=false>Available</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="inServiceLocation">In Service Location
+            <div *ngIf="animalFieldsForm.get('inServiceLocation')?.errors?.['backend']"
+                 class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('inServiceLocation')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'inServiceLocation'" appInputValidation
+                 class="form-control" formControlName="inServiceLocation" id="inServiceLocation" placeholder="Enter in service location"
+                 required type="text"
+                 validationType="alphaNumeric">
+          <div
+            *ngIf="!isValidInput['inServiceLocation'] && (animalFieldsForm.controls['inServiceLocation'].touched || animalFieldsForm.controls['inServiceLocation'].dirty)"
+            class="alert alert-danger validationAlert small-alert" role="alertdialog">
+            <div><i class="bi bi-exclamation-triangle-fill"></i> Only alpha characters allowed! (A-Z)</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="name">Name
+            <div *ngIf="animalFieldsForm.get('name')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('name')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'name'" appInputValidation class="form-control" formControlName="name"
+                 id="name" placeholder="Enter animal name" required type="text"
+                 validationType="alpha">
+          <div
+            *ngIf="!isValidInput['name'] && (animalFieldsForm.controls['name'].touched || animalFieldsForm.controls['name'].dirty)"
+            class="alert alert-danger validationAlert small-alert" role="alertdialog">
+            <div><i class="bi bi-exclamation-triangle-fill"></i>Only alpha characters allowed! (A-Z)</div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedAnimalType == 'dog'">
+          <div class="mb-3">
+            <label class="form-label" for="breed">Breed
+              <div *ngIf="animalFieldsForm.get('name')?.errors?.['backend']" class="text-danger asterisk ms-2">
+                {{ animalFieldsForm.get('name')?.errors?.['backend'] }}
+              </div>
+            </label>
+            <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'breed'" appInputValidation class="form-control" formControlName="breed"
+                   id="breed" placeholder="Enter Breed" type="text"
+                   validationType="alpha">
+            <div
+              *ngIf="!isValidInput['breed'] && (animalFieldsForm.controls['breed'].touched || animalFieldsForm.controls['breed'].dirty)"
+              class="alert alert-danger validationAlert small-alert" role="alertdialog">
+              <div><i class="bi bi-exclamation-triangle-fill"></i>Only alpha characters allowed! (A-Z)</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedAnimalType == 'monkey'">
+          <div class="mb-3">
+            <label class="form-label" for="speciesDataList">Species
+              <div *ngIf="animalFieldsForm.get('species')?.errors?.['backend']" class="text-danger asterisk ms-2">
+                {{ animalFieldsForm.get('species')?.errors?.['backend'] }}
+              </div>
+            </label>
+            <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'species'" appInputValidation class="form-select"
+                   formControlName="species" id="speciesDataList" list="speciesListOptions" placeholder="Enter Species"
+                   type="text" validationType="alpha">
+            <datalist id="speciesListOptions">
+              <option value="Capuchin">
+              <option value="Guenon">
+              <option value="Macaque">
+              <option value="Marmoset">
+              <option value="Squirrel monkey">
+              <option value="Tamarin">
+            </datalist>
+            <div
+              *ngIf="!isValidInput['species'] && (animalFieldsForm.controls['species'].touched || animalFieldsForm.controls['species'].dirty)"
+              class="alert alert-danger validationAlert small-alert" role="alertdialog">
+              <div><i class="bi bi-exclamation-triangle-fill"></i>Only alpha characters allowed! (A-Z)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="gender">Gender
+            <div *ngIf="animalFieldsForm.get('gender')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('gender')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <select class="form-select" formControlName="gender" id="gender" required>
+            <option disabled selected value="">Select...</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+
+        <div class="mb-3">
+          <label class="form-label" for="age">Age
+            <div *ngIf="animalFieldsForm.get('age')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('age')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'age'" appInputValidation class="form-control" formControlName="age" id="age"
+                 placeholder="Enter Age" required type="text"
+                 validationType="numeric">
+          <div
+            *ngIf="!isValidInput['age'] && (animalFieldsForm.controls['age'].touched || animalFieldsForm.controls['age'].dirty)"
+            class="alert alert-danger validationAlert small-alert" role="alertdialog">
+            <div><i class="bi bi-exclamation-triangle-fill"></i>Only numbers allowed!</div>
+          </div>
+          <div class="form-text" id="AgeHelpBlock">
+            Enter age rounded to the nearest year.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="weight">Weight
+            <div *ngIf="animalFieldsForm.get('weight')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('weight')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'weight'" appInputValidation class="form-control" formControlName="weight"
+                 id="weight" placeholder="Enter Weight" required type="text"
+                 validationType="numeric">
+          <div
+            *ngIf="!isValidInput['weight'] && (animalFieldsForm.controls['weight'].touched || animalFieldsForm.controls['weight'].dirty)"
+            class="alert alert-danger validationAlert small-alert" role="alertdialog">
+            <div><i class="bi bi-exclamation-triangle-fill"></i>Only numbers allowed!</div>
+          </div>
+          <div class="form-text" id="WeightHelpBlock">Enter weight in lbs.</div>
+        </div>
+
+        <div *ngIf="selectedAnimalType == 'monkey'">
+          <div class="mb-3">
+            <label class="form-label" for="bodyLength">Body Length
+              <div *ngIf="animalFieldsForm.get('bodyLength')?.errors?.['backend']" class="text-danger asterisk ms-2">
+                {{ animalFieldsForm.get('bodyLength')?.errors?.['backend'] }}
+              </div>
+            </label>
+            <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'bodyLength'" appInputValidation class="form-control"
+                   formControlName="bodyLength" id="bodyLength" placeholder="Enter Body Length" required type="text"
+                   validationType="numeric">
+            <div
+              *ngIf="!isValidInput['bodyLength'] && (animalFieldsForm.controls['bodyLength'].touched || animalFieldsForm.controls['bodyLength'].dirty)"
+              class="alert alert-danger validationAlert small-alert" role="alertdialog">
+              <span><i class="bi bi-exclamation-triangle-fill"></i>Only numbers allowed!</span>
+            </div>
+            <div class="form-text" id="BodyLengthHelpBlock">
+              Measurement in inches of monkey from the top of head to the base of tail.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="height">Height
+              <div *ngIf="animalFieldsForm.get('height')?.errors?.['backend']" class="text-danger asterisk ms-2">
+                {{ animalFieldsForm.get('height')?.errors?.['backend'] }}
+              </div>
+            </label>
+            <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'height'" appInputValidation class="form-control" formControlName="height"
+                   id="height" placeholder="Enter Height" required type="text"
+                   validationType="numeric">
+            <div
+              *ngIf="!isValidInput['height'] && (animalFieldsForm.controls['height'].touched || animalFieldsForm.controls['height'].dirty)"
+              class="alert alert-danger validationAlert small-alert" role="alertdialog">
+              <div><i class="bi bi-exclamation-triangle-fill"></i>Only numbers allowed!</div>
+            </div>
+            <div class="form-text" id="HeightHelpBlock">
+              Measurement in inches of monkey from the top of head to the ground.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="tailLength">Tail Length
+              <div *ngIf="animalFieldsForm.get('tailLength')?.errors?.['backend']" class="text-danger asterisk ms-2">
+                {{ animalFieldsForm.get('tailLength')?.errors?.['backend'] }}
+              </div>
+            </label>
+            <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'tailLength'" appInputValidation class="form-control"
+                   formControlName="tailLength" id="tailLength" placeholder="Enter Tail Length" required type="text"
+                   validationType="numeric">
+            <div
+              *ngIf="!isValidInput['tailLength'] && (animalFieldsForm.controls['tailLength'].touched || animalFieldsForm.controls['tailLength'].dirty)"
+              class="alert alert-danger validationAlert small-alert" role="alertdialog">
+              <div><i class="bi bi-exclamation-triangle-fill"></i>Only numbers allowed!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="originCountry">Origin Country
+            <div *ngIf="animalFieldsForm.get('originCountry')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('originCountry')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <input (validationStatus)="handleValidationStatus($event)" [fieldName]="'originCountry'" appInputValidation
+                 class="form-control" formControlName="originCountry" id="originCountry" placeholder="Enter origin country"
+                 required type="text"
+                 validationType="alphaAndApos">
+          <div
+            *ngIf="!isValidInput['originCountry'] && (animalFieldsForm.controls['originCountry'].touched || animalFieldsForm.controls['originCountry'].dirty)"
+            class="alert alert-danger validationAlert small-alert" role="alertdialog">
+            <div><i class="bi bi-exclamation-triangle-fill"></i>Only alpha and ' characters allowed!</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="originDate">Origin Date
+            <div *ngIf="animalFieldsForm.get('originDate')?.errors?.['backend']" class="text-danger asterisk ms-2">
+              {{ animalFieldsForm.get('originDate')?.errors?.['backend'] }}
+            </div>
+          </label>
+          <input class="form-control" formControlName="originDate" id="originDate" max="12/31/9999" min="01/01/1980"
+                 placeholder="MM/DD/YYYY" required type="date">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

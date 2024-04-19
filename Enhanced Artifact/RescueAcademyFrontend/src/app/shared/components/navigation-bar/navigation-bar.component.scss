@@ -1,0 +1,16 @@
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+  &-brand {
+    &.d-flex.align-items-center {
+      cursor: pointer !important;
+    }
+  }
+}
+
+.nav-link {
+  &.active {
+    cursor: pointer !important;
+    color: black;
+  }
+}

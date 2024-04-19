@@ -1,0 +1,13 @@
+<nav aria-label="Table navigation">
+  <ul class="pagination">
+    <li [class.disabled]="currentPage === 1" class="page-item">
+      <a (click)="navigatePage(currentPage - 1); $event.preventDefault()" class="page-link" href="#">Previous</a>
+    </li>
+    <li *ngFor="let page of pages" [class.active]="currentPage === page" class="page-item">
+      <a (click)="navigatePage(page); $event.preventDefault()" class="page-link" href="#">{{ page }}</a>
+    </li>
+    <li [class.disabled]="currentPage === totalPages" class="page-item">
+      <a (click)="navigatePage(currentPage + 1); $event.preventDefault()" class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>

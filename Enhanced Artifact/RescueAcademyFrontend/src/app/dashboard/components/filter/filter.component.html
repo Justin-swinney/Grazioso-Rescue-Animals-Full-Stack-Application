@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-9">
+    <div class="btn-group" role="group">
+      <div class="btn-group">
+        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                type="button">{{ selectedAnimalType | titlecase }}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a (click)="selectedAnimalType = 'Animal Type'; emitFilters()"
+                 class="dropdown-item">None</a>
+          </li>
+          <li><a (click)="selectedAnimalType = 'dog'; emitFilters()"
+                 class="dropdown-item">Dog</a></li>
+          <li><a (click)="selectedAnimalType = 'monkey'; emitFilters()"
+                 class="dropdown-item">Monkey</a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                type="button">{{ selectedRescueType }}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a (click)="selectedRescueType = 'Rescue Type'; emitFilters()" class="dropdown-item">None</a></li>
+          <li><a (click)="selectedRescueType = 'Water Rescue'; emitFilters()" class="dropdown-item">Water Rescue</a>
+          </li>
+          <li><a (click)="selectedRescueType = 'Fire Rescue';  emitFilters()" class="dropdown-item">Fire Rescue</a></li>
+          <li><a (click)="selectedRescueType = 'Wilderness Rescue'; emitFilters()" class="dropdown-item">Wilderness
+            Rescue</a></li>
+          <li><a (click)="selectedRescueType = 'Urban Search and Rescue';  emitFilters()" class="dropdown-item">Urban
+            Search and Rescue</a></li>
+          <li><a (click)="selectedRescueType = 'Disaster Tracking';  emitFilters()" class="dropdown-item">Disaster
+            Tracking</a></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                type="button">{{ selectedReservationStatus }}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a (click)="selectedReservationStatus = 'Reservation Status'; emitFilters()"
+                 class="dropdown-item">None</a></li>
+          <li><a (click)="selectedReservationStatus = 'Reserved'; emitFilters()" class="dropdown-item">Reserved</a></li>
+          <li><a (click)="selectedReservationStatus = 'Available'; emitFilters()" class="dropdown-item">Available</a>
+          </li>
+        </ul>
+      </div>
+      <button (click)="resetFilters()" class="btn btn-primary" type="button">Reset</button>
+    </div>
+  </div>
+</div>

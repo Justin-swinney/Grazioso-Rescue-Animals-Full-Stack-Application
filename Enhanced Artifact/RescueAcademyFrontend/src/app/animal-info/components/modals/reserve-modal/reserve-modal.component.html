@@ -1,0 +1,34 @@
+<button [ngClass]="{'btn-danger': this.animal.reserved, 'btn-primary': !this.animal.reserved}"
+        class="btn w-100" data-bs-target="#reserveModal" data-bs-toggle="modal" type="button">
+  {{ this.animal.reserved ? 'Unreserve' : 'Reserve' }}
+</button>
+<div #reserveModal aria-hidden="true" aria-labelledby="reserveModalLabel" class="modal fade" id="reserveModal"
+     tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (submit)="updateReservationStatus()" [formGroup]="reserveForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reserveModalLabel">Reserve Animal</h5>
+          <button aria-label="Close" class="btn-close bg-danger" data-bs-dismiss="modal" type="button"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label" for="currentInServiceLocation">Current In Service Location</label>
+            <input [value]="this.animal.inServiceLocation" class="form-control" disabled
+                   id="currentInServiceLocation" type="text" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="newInServiceLocation">New In Service Location</label>
+            <input class="form-control" formControlName="inServiceLocation" id="newInServiceLocation" type="text" appInputValidation validationType="alphaNumeric">
+            <div *ngIf="!isValidInput" class="invalid-feedback">No special characters allowed!</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-dismiss="modal"
+                  type="submit">{{ this.animal.reserved ? 'Unreserve' : 'Reserve' }} Animal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

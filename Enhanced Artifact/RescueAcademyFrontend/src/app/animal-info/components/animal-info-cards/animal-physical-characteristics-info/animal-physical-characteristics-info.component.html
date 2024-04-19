@@ -1,0 +1,45 @@
+<div class="card shadow">
+  <div class="card-header text-center">
+    <h2>Physical Characteristics</h2>
+  </div>
+  <div class="card-body">
+    <div class="characteristics card shadow">
+
+      <div class="row justify-content-center">
+        <div class="col ps-lg-5">
+          <h5>Age</h5>
+          <p>{{ animal?.age }} years old</p>
+        </div>
+        <div class="col">
+          <h5>Weight</h5>
+          <p>{{ animal?.weight }} lbs</p>
+        </div>
+        <div class="col">
+          <h5>Gender</h5>
+          <p>{{ animal?.gender }}</p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col ps-lg-5">
+          <div *ngIf="animal?.animalType === 'monkey'">
+            <h5>Height</h5>
+            <p>{{ animal?.height }}</p>
+          </div>
+        </div>
+        <div class="col">
+          <div *ngIf="animal?.animalType === 'monkey'">
+            <h5>Body Length</h5>
+            <p>{{ animal?.bodyLength }}</p>
+          </div>
+        </div>
+        <div class="col">
+          <div *ngIf="animal?.animalType === 'monkey'">
+            <h5>Tail Length</h5>
+            <p>{{ animal?.tailLength }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

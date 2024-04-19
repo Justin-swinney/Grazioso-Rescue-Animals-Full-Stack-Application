@@ -1,0 +1,53 @@
+<div class="col-md-4 p-3">
+  <button (click)="navigateToLogin()" class="btn bg-secondary-subtle">&larr; Back</button>
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<div class="container my-5">
+  <h1 class="text-center p-lg-5">Welcome to Rescue Academy!</h1>
+  <div class="card shadow">
+    <div class="card-body p-5">
+      <form #form="ngForm" (ngSubmit)="register(form)">
+        <div class="mb-4">
+          <label for="username" class="form-label">Username</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" required [(ngModel)]="username" name="username" appInputValidation [fieldName]="'username'" [validationType]="'alphaNumeric'" (validationStatus)="handleValidationStatus($event)">
+          </div>
+          <div *ngIf="usernameErrorMessage" class="text-danger">{{ usernameErrorMessage }}</div>
+          <div *ngIf="usernameValidationErrorMessage" class="text-danger">{{ usernameValidationErrorMessage }}</div>
+        </div>
+        <div class="row mb-4">
+          <div class="col">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-key"></i></span>
+              <input type="password" class="form-control" id="password" placeholder="Enter password" required [(ngModel)]="password" name="password" aria-label="Password" aria-describedby="password-toggle">
+            </div>
+            <div *ngIf="passwordErrorMessage" class="text-danger">{{ passwordErrorMessage }}</div>
+          </div>
+          <div class="col">
+            <label for="passwordConfirmation" class="form-label">Confirm Password</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-key"></i></span>
+              <input type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm password" required [(ngModel)]="confirmationPassword" name="confirmationPassword" appInputValidation [fieldName]="'confirmationPassword'" aria-label="Password" aria-describedby="password-toggle">
+            </div>
+            <div *ngIf="confirmationPasswordErrorMessage" class="text-danger">{{ confirmationPasswordErrorMessage }}</div>
+          </div>
+          <div *ngIf="!verifyPasswordMatch() && password !== '' && confirmationPassword !== ''" class="text-danger">
+            Passwords do not match.
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="form-label">Email</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" required [(ngModel)]="email" name="email" appInputValidation [fieldName]="'email'" [validationType]="'againstScript'" (validationStatus)="handleValidationStatus($event)">
+          </div>
+          <div *ngIf="emailErrorMessage" class="text-danger">{{ emailErrorMessage }}</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

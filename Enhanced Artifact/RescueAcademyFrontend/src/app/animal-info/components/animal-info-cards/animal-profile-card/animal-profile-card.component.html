@@ -1,0 +1,56 @@
+<div class="card shadow">
+  <div class="card-header text-center">
+    <div class="row align-items-center">
+      <div class="col">
+        <div class="col-md-4 d-flex flex-column align-items-center">
+          <div *ngIf="animal?.animalType === 'dog'; else showMonkeyIcon">
+            <img alt="Dog Shape Image" class="animal-type-icon" height="512" loading="eager"
+                 ngSrc="/assets/images/icons/dog-shape.png" width="512">
+
+          </div>
+          <ng-template #showMonkeyIcon>
+            <img alt="Dog Shape Image" class="animal-type-icon" height="512"
+                 loading="eager" ngSrc="/assets/images/icons/monkey-shape.png" width="512">
+
+          </ng-template>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div *ngIf="animal?.reserved; else showAvailable">
+          <h2><span [class.text-bg-danger]="animal?.reserved" [class.text-bg-success]="!animal?.reserved"
+                    class="badge rounded-pill text-bg-danger">
+               {{ animal?.reserved ? 'Reserved' : 'Available' }}
+            </span>
+          </h2>
+        </div>
+        <ng-template #showAvailable>
+          <h2><span class="badge rounded-pill text-bg-success">Available</span></h2>
+        </ng-template>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+  <div class="card shadow rounded-top-0 animal-profile-card">
+    <div>
+      <img #imageElement
+           (error)="imageElement.src='/assets/images/placeholder.jpg'"
+           [src]="animal?.animalProfilePictureUrl ? animal?.animalProfilePictureUrl : '/assets/images/placeholder.jpg'" alt="Animal Image"
+           class="animal-profile-picture rounded mx-auto d-block img-fluid p-md-2"
+           height="612"
+           loading="eager"
+           width="612">
+    </div>
+    <div>
+      <h2>{{ animal?.name }}</h2>
+      <p class="mb-0">{{ animal?.rescueType }} Specialist</p>
+      <div *ngIf="animal?.animalType == 'dog'; else showSpecies">
+        <p>{{ animal?.breed }}</p>
+      </div>
+      <ng-template #showSpecies>
+        <p>{{ animal?.species }}</p>
+      </ng-template>
+    </div>
+    <app-reserve-modal (reservationStatusChanged)="updateReservationStatus($event)" [animal]="animal!"></app-reserve-modal>
+  </div>
+</div>
+

@@ -1,0 +1,7 @@
+.no-outline:focus,
+.no-outline:active,
+.no-outline:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: transparent !important;
+}

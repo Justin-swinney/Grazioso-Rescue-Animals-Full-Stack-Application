@@ -1,0 +1,8 @@
+<div class="card shadow p-2 text-center">
+  <h5>Training Status</h5>
+  <app-animal-training-status [animal]="animal" [trainingStatus]="animal?.trainingStatus"></app-animal-training-status>
+  <div class="training-status-msg">
+    {{ getTrainingStatusMessage(animal?.trainingStatus, animal?.rescueType) }}
+  </div>
+</div>
+

@@ -1,0 +1,68 @@
+.table {
+  thead th {
+    vertical-align: middle;
+    div {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+  tbody th,
+  tbody td {
+    vertical-align: middle;
+  }
+}
+
+.animal-col-headers {
+  display: inline-flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.in-service-location-column {
+  width: 16%;
+}
+
+th,
+tr {
+  text-align: center;
+}
+
+.animal-rows {
+  cursor: pointer;
+  height: 65px;
+}
+
+.status-box {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.reserved .status-box {
+  background-color: lightcoral;
+  color: rgb(0, 0, 0);
+}
+
+.available .status-box {
+  background-color: lightgreen;
+  color: rgb(0, 0, 0);
+}
+
+.page-link:focus,
+.form-select:focus {
+  box-shadow: none !important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .table tbody th {
+    height: 50px;
+  }
+
+  .status-box {
+    padding: 3px 5px;
+  }
+}

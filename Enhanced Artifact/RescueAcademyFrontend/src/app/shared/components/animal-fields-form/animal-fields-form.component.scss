@@ -1,0 +1,15 @@
+.small-alert {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+}
+
+label {
+  display: flex;
+  align-items: center;
+}
+
+.asterisk::before {
+  content: "*";
+  font-size: 1.2em;
+}

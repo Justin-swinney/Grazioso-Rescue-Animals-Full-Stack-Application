@@ -1,0 +1,57 @@
+.login-body {
+  background-image: url('/assets/images/login-page/rescue-dog-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.card.shadow.p-3 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  min-width: 50%;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.signInHeader {
+  margin-bottom: 5%;
+}
+
+.login-button-container {
+  margin-bottom: 40px;
+}
+
+.forgot-password-container {
+  margin-bottom: 20px;
+}
+
+.error-message {
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

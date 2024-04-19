@@ -1,0 +1,12 @@
+<div *ngIf="animal!">
+  <div class="progress">
+    <div [attr.aria-valuenow]="percentage" [ngClass]="progressBarClass"
+         [style.width]="percentage"
+         aria-valuemax="100"
+         aria-valuemin="0"
+         class="progress-bar progress-bar-striped" role="progressbar">
+      {{ percentage }}
+    </div>
+    <span *ngIf="percentage === '0%'" class="zero-percent">0%</span>
+  </div>
+</div>

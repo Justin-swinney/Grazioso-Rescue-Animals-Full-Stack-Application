@@ -1,0 +1,15 @@
+<form [formGroup]="searchForm" class="search-form" novalidate>
+  <div class="alert-container">
+    <div *ngIf="invalidInput" class="alert alert-danger d-flex align-items-center fade show alert-dismissible"
+         role="alert">
+      <div><i class="bi bi-exclamation-triangle-fill"></i> No special characters allowed!</div>
+    </div>
+  </div>
+  <div class="input-group">
+    <span class="input-group-text">
+    <i class="bi bi-search"></i>
+  </span>
+    <input (input)="onInput($event)" class="form-control" formControlName="searchInput" placeholder="Search..."
+           type="text">
+  </div>
+</form>

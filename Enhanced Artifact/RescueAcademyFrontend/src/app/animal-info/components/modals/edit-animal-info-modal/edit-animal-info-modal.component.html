@@ -1,0 +1,22 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn bg-primary-subtle btn-lg  bi-pencil-square" data-bs-toggle="modal" data-bs-target="#editAnimalInfoModal"></button>
+
+<!-- Modal -->
+<div class="modal fade" id="editAnimalInfoModal"  tabindex="-1" aria-labelledby="editAnimalInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl  modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editAnimalInfoModalLabel">Edit Animal Info</h5>
+        <button type="button"  class="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-animal-fields-form [animal]="animal?.id ? animal : null"  [isNewAnimal]="false" (saveFormData)="saveFormData($event)"></app-animal-fields-form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg bi bi-trash-fill me-auto bg-danger" style="color: white" data-bs-dismiss="modal" (click)="deleteAnimal()"></button>
+        <button type="button" class="btn btn-primary btn-lg bi-floppy-fill ms-auto" data-bs-dismiss="modal" (click)="saveChanges()"></button>
+      </div>
+    </div>
+  </div>
+</div>
+

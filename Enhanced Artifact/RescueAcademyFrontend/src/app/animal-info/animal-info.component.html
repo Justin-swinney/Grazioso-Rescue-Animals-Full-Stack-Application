@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 p-3">
+      <button (click)="navigateToDashboard()" class="btn bg-secondary-subtle">&larr; Back</button>
+    </div>
+    <div class="col-md-4 p-2 text-center profile-card"></div>
+    <div class="col-md-4 d-flex flex-column align-items-end p-3 edit-profile-button">
+      <app-edit-animal-info-modal *ngIf="animal" [animal]="animal" (onSave)="loadAnimalDetails(animal.id!)" ></app-edit-animal-info-modal>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col"></div>
+    <div class="col-md-4 p-2 text-center profile-card">
+      <app-animal-profile-card *ngIf="animal"  [animal]="animal" (onSave)="loadAnimalDetails(animal.id!)"></app-animal-profile-card>
+    </div>
+    <div class="row"></div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        <div class="col p-3">
+          <div class="card shadow">
+            <div class="card-header text-center">
+              <h2>Location & Training Information</h2>
+            </div>
+            <div class="card-body">
+              <app-animal-training-info *ngIf="animal" [animal]="animal"></app-animal-training-info>
+            </div>
+            <div class="card-body">
+              <app-animal-in-service-location-info *ngIf="animal" [animal]="animal"></app-animal-in-service-location-info>
+            </div>
+          </div>
+        </div>
+        <div class="col p-3">
+          <app-animal-physical-characteristics-info *ngIf="animal" [animal]="animal"></app-animal-physical-characteristics-info>
+        </div>
+        <div class="col p-3">
+          <app-animal-origin-info *ngIf="animal" [animal]="animal"></app-animal-origin-info>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="table-responsive">
+  <table class="table table-hover w-100">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Animal Type</th>
+      <th>Rescue Type</th>
+      <th>
+        Name
+        <app-sort (sort)="onSort($event)" [sortKey]="'name'"></app-sort>
+      </th>
+      <th>
+        Gender
+        <app-sort (sort)="onSort($event)" [sortKey]="'gender'"></app-sort>
+      </th>
+      <th>Age</th>
+      <th>Weight (lbs)</th>
+      <th>
+        Training Status
+        <app-sort (sort)="onSort($event)" [customSort]="trainingStatusSort" [sortKey]="'trainingStatus'"></app-sort>
+      </th>
+      <th class="in-service-location-column">
+        In Service Location
+        <app-sort (sort)="onSort($event)" [sortKey]="'inServiceLocation'"></app-sort>
+      </th>
+      <th>Reservation Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="filteredRescueAnimals.length === 0; else animalRows">
+      <tr>
+        <td class="text-center" colspan="10">No animals found</td>
+      </tr>
+    </ng-container>
+    <ng-template #animalRows>
+      <tr (click)="openAnimalInfoPage(animal)"
+          *ngFor="let animal of filteredRescueAnimals.slice((currentPage - 1) * animalsPerPage, currentPage * animalsPerPage); let i = index"
+          class="animal-rows">
+        <th>{{ (currentPage - 1) * animalsPerPage + i + 1 }}</th>
+        <td>{{ animal.animalType | titlecase }}</td>
+        <td>{{ animal.rescueType | titlecase }}</td>
+        <td>{{ animal.name | titlecase }}</td>
+        <td>{{ animal.gender | titlecase }}</td>
+        <td>{{ animal.age }}</td>
+        <td>{{ animal.weight }}</td>
+        <td>
+          <app-animal-training-status [animal]="animal"
+                                      [trainingStatus]="animal.trainingStatus"></app-animal-training-status>
+        </td>
+        <td>{{ animal.inServiceLocation | titlecase }}</td>
+        <td [ngClass]="{'reserved': animal.reserved, 'available': !animal.reserved}">
+          <div class="status-box">
+            <span *ngIf="animal.reserved; else available">Reserved</span>
+            <ng-template #available>Available</ng-template>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    </tbody>
+  </table>
+</div>
+

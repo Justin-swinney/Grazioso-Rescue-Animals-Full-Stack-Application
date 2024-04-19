@@ -1,0 +1,41 @@
+<body class="login-body">
+  <div class="container">
+    <div class="card shadow p-3">
+        <div class="col">
+          <h1 class="signInHeader">Sign In</h1>
+          <form (ngSubmit)="login()" [formGroup]="loginForm">
+            <div class="alert alert-danger error-message" [ngClass]="{'show': errorMessage}">
+              {{ errorMessage }}
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-person-fill"></i>
+                </span>
+              <div class="form-floating ">
+                <input class="form-control" formControlName="username" id="floating-username" placeholder="Username"
+                       required type="text" appInputValidation validationType="alphaNumeric" [fieldName]="'username'" >
+                <label for="floating-username">Username</label>
+              </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-key-fill"></i>
+                </span>
+              <div class="form-floating ">
+                <input class="form-control" formControlName="password" id="floating-password" placeholder="Password"
+                       required type="password" aria-label="Password" aria-describedby="password-toggle">
+                <label for="floating-password">Password</label>
+              </div>
+            </div>
+            <div class="forgot-password-container">
+              <a>Forgot Password?</a>
+            </div>
+            <div class="login-button-container">
+              <button class="btn btn-primary registration" type="submit">Sign In</button>
+            </div>
+            <a class="btn btn-primary registration" (click)="navigateToRegister()">Create Account</a>
+          </form>
+        </div>
+    </div>
+  </div>
+</body>
